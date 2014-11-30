@@ -1,0 +1,129 @@
+{% extends "base.htm" %}
+
+{% block content %}
+	<div class="row">
+    <div class="col-md-9">            
+			{% if session.admin == 1 %}	
+				<button class="btn btn-sm btn-success" onClick='return window.print();'>Tisk tiketu</button>
+        {% if data[0].odjezd is null %}
+				<form role="form" method='post' style='display: inline;'>
+					<button class="btn btn-sm btn-primary" name='odesla'>Návštěva odešla</button>
+		  	</form>  
+        {% endif %}      
+		  {% endif %}
+		  <button class="btn btn-sm btn-success" id='kontakt_dozor'>Kontakt na zodpovědnou osobu</button>
+			{% if data[0].uvolneno is null and data[0].odjezd is null %}	
+				<form role="form" method='post' style='display: inline;'>
+					<button class="btn btn-sm btn-primary" name='odchazi'>Návštěva právě odchází</button>
+		  	</form>
+			{% endif %}
+  	</div>
+	</div>
+	
+  <table class='topTable'>
+    <tr>
+      <td class='big'>Návštěva: {{ data[0].zadano }}</td>
+      <td class='big fright'>{{ data[0].idn }}<img src='php/barcode.php?code=N.{{ data[0].idn }}' alt='N.{{ data[0].idn }}'></td>
+    </tr>
+  </table>
+  <table class='myTable'>
+    <tr>
+      <th>Firma</th>
+      <th>SPZ vozidla</th>
+    </tr>
+    <tr>
+      <td>{{ data[0].nazev }}</td>
+      <td>{{ data[0].spz }}</td>
+    </tr>  
+    <tr>
+      <th>Jména návštěvníků</th>
+      <th>Jméno navštíveného</th>
+    </tr>
+    <tr>
+      <td rowspan='3'>{{ data[0].prichozi | raw }}</td>
+      <td>{{ data[0].za_kym }}</td>
+    </tr>
+    <tr>
+      <th>Účel návštěvy</th>
+    </tr>
+    <tr>
+      <td style='height: 90px;'>{{ data[0].ucel }}</td>
+    </tr>
+  </table>
+  <table class='myTable printable'>  
+    <tr>
+      <td colspan='2' style='height: 685px;'>
+        <div style='font-size: 15px;'>
+        <h3>Pokyny pro řidiče a návštěvníky:</h3>
+        <ul>
+          <li>Dodržovat pokyny strážní služby</li>
+          <li>Nosit visačku návštěva na viditelném místě</li>
+          <li>Pohybovat se v areálu se zvýšenou opatrností a respektovat výstražné tabulky</li>
+          <li>Nepořizovat audiovizuální záznamy</li>
+          <li>Nevstupovat do výrobních prostor bez OOP a doprovodu</li>
+          <li>Dodržovat maximální povolenou rychlost jízdy 20 km/hod</li>
+          <li>Odstavovat vozidlo pouze na určených místech a řádně jej zabezpečit</li>
+          <li>Dodržovat zákaz požívání alkoholu a jiných omamných látek</li>
+          <li>Při odjezdu souhlasí s možností provedení osobní prohlídky</li>
+          <li>Při odjezdu je nutné odevzdat toto povolení a visačku na vrátnici</li>
+        </ul>
+        <p>Vaše osobní údaje slouží výhradně pro naši interní potřebu a jsou zpracovávány v souladu s platnou legislativou.</p>
+        <div style='height: 300px;'></div>
+        
+        Podpis návštěvníka: _______________________________________        
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>Čas odchodu</th>
+      <th>Podpis navštíveného</th>
+    </tr>
+    <tr style='height: 60px;'>
+      <td></td>
+      <td></td>
+    </tr> 
+    <tr>
+      <th style='border-bottom: 2px solid #000;'>Telefon vrátnice: 123 456 789</th>
+      <th style='border-bottom: 2px solid #000;'>Mobil vrátnice: 987 654 321</th>
+    </tr>    
+  </table> 
+    
+	<div class="row" style='margin-top: 20px;'>
+    <div class="col-md-9">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th>Kdo</th>
+            <th>Kdy</th>
+            <th>Text poznámky</th>
+          </tr>
+        </thead>        
+        <tfoot>
+          <tr>
+          	<td colspan='3'>Přidat poznámku:            
+							<form role="form" method='post'>
+								<textarea class="form-control" rows="4" name="poznamka"></textarea>
+								<button class="btn btn-sm btn-success" id='pridatPoznamku' style='float: right; margin-top: 5px;'>Přidat poznámku</button>
+							</form>
+						</td>
+          </tr>       	              
+				</tfoot>
+        <tbody>  
+  			{% for poznamka in poznamky %}
+  				<tr>
+	          <td>{{ poznamka.kdo }}</td>
+	          <td>{{ poznamka.zadano }}</td>
+	          <td>{{ poznamka.text }}</td> 
+					</tr>  
+  			{% endfor %}
+  			</tbody>
+  		</table>
+  		
+  		<p>
+				Příjezd do závodu: {{ data[0].zadano }}<br /> 
+  			Začal odcházet:    {{ data[0].uvolneno }}<br /> 
+  			Odjezd ze závodu:  {{ data[0].odjezd }}<br /> 
+			</p>
+  	</div>
+	</div>
+{% endblock %}

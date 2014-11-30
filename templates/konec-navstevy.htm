@@ -1,0 +1,18 @@
+{% extends "base.htm" %}
+
+{% block end_active %}class="active"{% endblock %}
+{% block content %}
+  <h1>Vyhledání návštěvy dle ID</h1>
+  <div class="row">
+    <form role="form" method='get'>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="barcode">Načtěte / opište čárový kód z tiketu:</label>
+          <input type='hidden' name='page' value='detail-navstevy'>
+          <input type="text" class="form-control" id="barcode" name='idn' autofocus required>
+        </div>  
+        <button class="btn btn-lg btn-success" id='end_visit'>Přejít k ukončení</button> 
+      </div>
+    </form>
+  </div>
+{% endblock %}

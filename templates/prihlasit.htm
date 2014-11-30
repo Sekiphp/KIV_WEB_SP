@@ -1,0 +1,12 @@
+{% extends "base.htm" %}
+
+{% block content %}       
+  <div class="container">
+    <form class="form-signin" role="form" action='index.php?page=prihlasit' method='post'>
+      <h2 class="form-signin-heading">Přihlašte se</h2>
+      <input type="email" name='email' class="form-control" placeholder="prijmeni@dacryo.cz" autocomplete='off' required autofocus>
+      <input type="password" name='passy' class="form-control" placeholder="Vaše heslo" required>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+  </div>
+{% endblock %}   

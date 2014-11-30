@@ -1,0 +1,47 @@
+{% extends "base.htm" %}
+
+{% block history_active %}class="active"{% endblock %}
+{% block content %}
+		<h1>Seznam návštěv</h1>
+      <div class="row">
+        <div class="col-md-12">
+          <form role="form" method='post'>
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Návštěvník</th>
+                <th>Firma</th>
+                <th>Za kým</th>
+                <th>Příchod</th>
+                <th>Odchod</th>
+                <th>Čas návštěvy</th>
+              </tr>
+              <tr> 
+                <th>&nbsp;</th>
+                <th><input type="text" class="form-control sminput" id="kdo" name='kdo'></th>
+                <th><input type="text" class="form-control sminput" id="firma" name='firma'></th>
+                <th><input type="text" class="form-control sminput" id="za_kym" name='za_kym'></th>
+                <th><input type="date" class="form-control sminput" id="prichod" name='prichod'></th>
+                <th>&nbsp;</th>
+                <th><button class="btn btn-sm btn-primary" name='najit'>Změnit filtr</button></th>
+              </tr>
+            </thead>
+            <tbody>
+					    {% for visit in navstevy %}
+					      <tr {% if session.logged == 1 %}onclick="document.location = '?page=detail-navstevy&amp;idn={{ visit.idn }}';" style='cursor: pointer;'{% endif %}>
+	                <td>{{ visit.idn }}</td>
+	                <td>{{ visit.prichozi | raw }}</td>
+	                <td>{{ visit.nazev }}</td>
+	                <td>{{ visit.za_kym }}</td>
+	                <td>{{ visit.zadano }}</td>
+	                <td>{{ visit.odjezd }}</td>
+	                <td>{{ visit.doba }}</td>
+	              </tr>
+					    {% endfor %}
+            </tbody>
+          </table>
+          </form>
+        </div>
+      </div>
+{% endblock %}

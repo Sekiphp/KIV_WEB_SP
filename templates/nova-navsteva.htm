@@ -1,0 +1,74 @@
+{% extends "base.htm" %}
+
+{% block new_active %}class="active"{% endblock %}
+{% block content %}
+  <h1>Nová návštěva</h1>
+  <div class="row">
+    <form role="form" method='post'>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="jmeno">Jméno návštěvníka / řidiče:</label>
+          <input type="text" class="form-control" id="jmeno" name='jmeno[]' placeholder='jméno a příjmení' autofocus required>
+        </div>
+        <div class="form-group">
+          <label for="cop">Číslo občanského průkazu:</label>
+          <input type="text" class="form-control" id="cop" name='cop[]'>
+        </div>
+        <div class="form-group">
+          <label for="nazev_firmy">Název firmy:</label>
+          <input type="text" class="form-control" id="nazev_firmy" name='nazev_firmy'>
+        </div>
+        <div class="form-group">
+          <label for="spz">SPZ vozidla:</label>
+          <input type="text" class="form-control" id="spz" name='spz'>
+        </div>
+        <div class="form-group">
+          <label for="zodpovedny">Jede za zaměstnancem:</label>
+          <input type="text" class="form-control" id="zodpovedny" name='zodpovedny' placeholder='vyberte z našeptávače' required>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="ucel">Účel návštěvy:</label>
+          <input type="text" class="form-control" id="ucel" name='ucel' required>
+        </div>
+        <div class="form-group">
+          <label for="poznamka">Poznámka:</label>
+          <textarea class="form-control" id="poznamka" name='poznamka' style='height: 110px;'></textarea>
+        </div>
+        <div class="row">                  
+          <div class="col-md-8" style='padding-right: 0px !important;'>
+            <div class="form-group">
+              <label for="name_2">Další osoby:</label>
+              <input type="text" class="form-control jmenosm" id="name_2" name='jmeno[]' placeholder='jméno a příjmení' style='margin-bottom: 3px;'>
+              <input type="text" class="form-control jmenosm" id="name_3" name='jmeno[]' placeholder='jméno a příjmení' style='margin-bottom: 3px;'>
+              <input type="text" class="form-control jmenosm" id="name_4" name='jmeno[]' placeholder='jméno a příjmení'>
+            </div>
+          </div>
+          <div class="col-md-4" style='padding-left: 10px !important;'>
+            <div class="form-group">
+              <label for="cop_2">&nbsp;</label> 
+              <input type="text" class="form-control" id="cop_2" name='cop[]' placeholder='číslo OP' style='margin-bottom: 3px;'>
+              <input type="text" class="form-control" id="cop_3" name='cop[]' placeholder='číslo OP' style='margin-bottom: 3px;'>
+              <input type="text" class="form-control" id="cop_4" name='cop[]' placeholder='číslo OP'>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-warning">
+          <div class="panel-heading">
+            <h3 class="panel-title">Pokyny</h3>
+          </div>
+          <div class="panel-body">
+            <p>Pro úspěšné přidání návštěvy je nutné vyplnit <strong>jméno návštěvníka, jméno zopovědného zaměstnance a účel návštěvy</strong>. Pokud je k dispozici více informací, vyplňte i další požadovaná pole pro zpřesnění záznamů.</p>
+            <p>Pokud je to možné, tak se vám systém snaží napovídat relavantní údaje z již uskutečněných návštěv, což vám může značně zrychlit zadávání.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <button class="btn btn-lg btn-success" id='add_visitor'>Přidat novou návštěvu</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}
